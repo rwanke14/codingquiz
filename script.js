@@ -21,10 +21,12 @@ var quizTimer = document.getElementById("quizTimer");
 var questions = document.getElementById("questions");
 var answers = document.getElementById("answers");
 var rightWrong = document.getElementById("rightWrong");
-var nextButton = document.createElement ("button");
 
+//var nextButton = document.createElement ("button");
+
+//Set variables with values for later. Timer value and Score value set.
 var timerValue = 60;
-var currentIndex = 0;
+var score = 0
 
 var questionDetails = [
     {
@@ -35,15 +37,19 @@ var questionDetails = [
     {
         question: "What is does 1+1 equal?",
         choices: ["5", "10", "2", "1"],
-        answer: "1"
+        answer: "1",
     },
 ]
 
-var questionShown = questionDetails[currentIndex];
+var quesitonIndex = 0
+var allQuestions = questionDetails.length
 
-//quesitonDetails.forEach(quizQuesitons);
+console.log(questionDetails[0]);
+console.log(questionDetails[1]);
 
-//var questionIndex = questionDetails[questionDetails.length];
+
+
+
 
 
 
@@ -61,47 +67,58 @@ function startQuiz() {
 
     }, 1000);
 
-
-    questionShown.choices.forEach(function (item, i) {
+    var currentChoicesIndex = 0
+    
+    questionDetails[currentChoicesIndex].choices.forEach(function (item, index) {
         var choiceBtn = document.createElement("button");
         choiceBtn.innerHTML = item;
         answers.appendChild(choiceBtn)
         choiceBtn.addEventListener("click", selectAnswer);
+        console.log(choiceBtn)
+        allQuestions++
+
         
-        
-    });
+
+    }); 
+
+    //nextQuestion();
 
 }
 
 function selectAnswer () {
 
-    
+    quesitonIndex = 0;
 
-    if (questionDetails[0].choices = "blue") {
+    if (this.value !== questionDetails[quesitonIndex].answer){
+        rightWrong.textContent = "Right!";
         
-        rightWrong.textContent = "Correct Answer!"
-        
-        
-    } else {
-        rightWrong.textContent = "Wrong Answer!"
-        
+    } 
+    
+    else {
+        rightWrong.textContent = "Wrong!";
     }
-
-    nextQuestion();
     
-
+    allQuestions++
+    console.log ("Right!")
+        console.log (rightWrong);
 }
 
+
+
+startQuizBtn.addEventListener("click", startQuiz);
+
+//function endQuiz (){
+
+    //var clear = document.getElementsByTagName("body");
+    //clear.createElement("jumbotron jumbotron-fluid");
+    
+
+
+//}
+/*
 function nextQuestion() {
 
-    questions.innerHTML = questionDetails[1].question; 
-
-    questionDetails[1].choices.forEach(function (item, index) {
-        var choiceBtn = document.createElement("button");
-        choiceBtn.innerHTML = item;
-        answers.appendChild(choiceBtn)
-    }); 
-
+    
 }
 
 /*answers.addEventListener ("click", function(){
@@ -114,10 +131,20 @@ function nextQuestion() {
 
      }
 
- }) */
+ }) 
 
 
+var replaceQuestion = document.getElementById ("questions");
+    replaceQuestion.replaceChild (questionDetails)
 
+
+    questions.innerHTML = questionDetails[1].question; 
+
+    questionDetails[1].choices.forEach(function (item, index) {
+        var choiceBtn = document.createElement("button");
+        choiceBtn.innerHTML = item;
+        answers.appendChild(choiceBtn)
+    });
 
 
 
@@ -128,33 +155,11 @@ function timerCount() {
 
 }
 
-/*
-    var liEl1 = questionDetails[0].choices[0]
-    var liEl2 = quesitonDetails[0].choices[1]
-    var liEl3 = questionDetails[0].choices[2]
-    var liEl4 = quesitonDetails[0].choices[3]
-    liEl1.createElement("li");
-    liEl2.createElement("li");
-    liEl3.createElement("li");
-    liEl4.createElement("li");
-    */
 
-nextButton.addEventListener("click", nextQuestion);
+//nextButton.addEventListener("click", nextQuestion);
 startQuizBtn.addEventListener("click", startQuiz);
 
 
-/*
-answers.addEventListener ("click", function(){
-    if (answers !== "blue") {
-        alert("wrong!")
-        startQuiz();
 
-    } else {
-        alert ("correct answer!")
-        startQuiz()
-
-    }
-
-})
 
 /*might need a second HTML for logging scores. */

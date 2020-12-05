@@ -1,0 +1,31 @@
+.jumbotron{
+    text-align: center;
+    font-family: fantasy;
+    color: darkmagenta;
+    background-color: dimgray;
+}
+
+#startQuizBtn {
+    color: white;
+    background-color: darkmagenta;
+    border-radius: 10%;
+    width: 10%;
+}
+
+#quizTimer {
+    margin-top: 5%;
+}
+
+.card {
+    color: darkmagenta;
+    background-image: url(https://st2.depositphotos.com/4502047/8011/v/600/depositphotos_80110308-stock-illustration-doodle-circles-fun-background.jpg);
+    padding: 30%;
+}
+
+.card-body {
+    text-align: left;
+    background-color: darkseagreen;
+    margin-top: 10%;
+
+}
+
