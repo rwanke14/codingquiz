@@ -15,18 +15,25 @@ THEN I can save my initials and score
 
 */
 
-
+var hideJumbotron = document.getElementById ("container");
 var startQuizBtn = document.getElementById("startQuizBtn");
 var quizTimer = document.getElementById("quizTimer");
 var questions = document.getElementById("questions");
 var answers = document.getElementById("answers");
 var rightWrong = document.getElementById("rightWrong");
+var quizContent = document.getElementsByClassName("card");
+var currentChoicesIndex = 0
 
 //var nextButton = document.createElement ("button");
 
 //Set variables with values for later. Timer value and Score value set.
-var timerValue = 60;
-var score = 0
+var timerValue = 150;
+var score = 0;
+var questionIndex = 0;
+var quizAnswers = "";
+//var endQuest = questionDetails[1].choices;
+
+
 
 var questionDetails = [
     {
@@ -41,18 +48,40 @@ var questionDetails = [
     },
 ]
 
-var quesitonIndex = 0
-var allQuestions = questionDetails.length
-
-console.log(questionDetails[0]);
-console.log(questionDetails[1]);
 
 
 
 
 
+//var choiceBtn = document.createElement("button");
 
 
+
+function nextQuestion () {
+
+    var currentQuestion = questionDetails[questionIndex];
+    currentQuestion.answer;
+    questions.textContent = currentQuestion.question;
+    answers.textContent 
+    
+
+    for ( var i = 0 < currentQuestion.choices.length; i++;){
+
+        var choiceBtn = document.createElement("button");
+        answers.textContent = currentQuestion.choices[i];
+        answers.appendChild(choiceBtn)
+        //choiceBtn.addEventListener("click", selectAnswer);
+        if (i === 1){
+            break;
+        }
+    }
+    console.log(currentQuestion);
+    console.log(currentQuestion);
+console.log(currentQuestion.answer);
+console.log(questionIndex)
+}
+
+console.log (questions);
 function startQuiz() {
 
     questions.innerHTML = questionDetails[0].question;
@@ -67,45 +96,24 @@ function startQuiz() {
 
     }, 1000);
 
-    var currentChoicesIndex = 0
     
-    questionDetails[currentChoicesIndex].choices.forEach(function (item, index) {
-        var choiceBtn = document.createElement("button");
-        choiceBtn.innerHTML = item;
-        answers.appendChild(choiceBtn)
-        choiceBtn.addEventListener("click", selectAnswer);
-        console.log(choiceBtn)
-        allQuestions++
 
-        
-
-    }); 
-
-    //nextQuestion();
-
+    nextQuestion();
+    
 }
 
-function selectAnswer () {
-
-    quesitonIndex = 0;
-
-    if (this.value !== questionDetails[quesitonIndex].answer){
-        rightWrong.textContent = "Right!";
-        
-    } 
-    
-    else {
-        rightWrong.textContent = "Wrong!";
-    }
-    
-    allQuestions++
-    console.log ("Right!")
-        console.log (rightWrong);
-}
 
 
 
 startQuizBtn.addEventListener("click", startQuiz);
+
+
+
+
+
+
+
+
 
 //function endQuiz (){
 
