@@ -4,9 +4,10 @@ var questions = document.getElementById("questions");
 var answers = document.getElementById("answers");
 var rightWrong = document.getElementById("rightWrong");
 
+//Variables to set the questions to start at the first one (0); start score at 0 and create a variable to get the full quesitonDetails array.
 var currentQuestion = 0;
 var score = 0;
-var allQuestions = questionDetails.length;
+
 
 
 var questionDetails = [
@@ -22,17 +23,9 @@ var questionDetails = [
     },
 ]
 
+var allQuestions = questionDetails.length;
 
 
-function startQuiz() {
-
-    quizTimer();
-    numofQuest = 0
-    score = 0
-    allQuestions = [...questionDetails];
-    nextQuestion();
-
-}
 
 
 //questions.innerHTML = questionShown.question;
@@ -52,24 +45,39 @@ function quizTimer () {
 }
 
 
-function nextQuesiton (questionDetailsIndex) {
 
-    //include score details && local storage information goes in here or create another function.
+function nextQuestion (questionDetailsIndex) {
 
-    var getQuestion = questionDetails[questionDetailsIndex];
-    questions.textContent = (questionDetailsIndex + 1) + '. ' + getQuestion.question;
+   
+    questions.innerHTML = questionDetails[0].question;
+    
+    var questionIndex = questionDetails.length
 
-    questionDetails[questionDetailsIndex].choices.forEach(function (item, index) {
+   questionIndex.choices.forEach(function (item, index) {
         var choiceBtn = document.createElement("button");
         choiceBtn.innerHTML = item;
         answers.appendChild(choiceBtn)
-        choiceBtn.addEventListener("click", selectAnswer);
+        choiceBtn.addEventListener("click", nextQuestion);
         console.log(choiceBtn)
-        allQuestions++});
+        questionIndex++
 
+        if (questionDetails === 0) {
+            questionDetails[1]
+        } else {
+
+        }
+    });
+
+}
+
+function startQuiz() {
+
+    //quizTimer();
+    nextQuestion();
 
 }
 
 function selectAnswer () {}
+
 
 startQuizBtn.addEventListener("click", startQuiz);

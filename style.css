@@ -1,3 +1,11 @@
+body {
+    background-image: url(https://ichef.bbci.co.uk/images/ic/1200x675/p04znpk2.jpg);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: 100% 210%;
+
+}
+
 .jumbotron{
     text-align: center;
     font-family: fantasy;
@@ -11,8 +19,9 @@
 #startQuizBtn {
     color: white;
     background-color: darkmagenta;
-    border-radius: 10%;
-    width: 10%;
+    border-radius: .25rem;
+    width: 20%;
+    
     
 }
 
@@ -24,15 +33,24 @@
 
 .card {
     color: darkmagenta;
-    background-image: url(https://st2.depositphotos.com/4502047/8011/v/600/depositphotos_80110308-stock-illustration-doodle-circles-fun-background.jpg);
-    padding: 30%;
-    
+    opacity: 80%;
+    margin: auto;
+    width: 50%;
+
 }
 
 .card-body {
-    text-align: left;
-    background-color: darkseagreen;
-    margin-top: 10%;
-
+    
+    background-color: white;
 }
 
+ li {
+     color: white
+ }
+
+.timer {
+    background-color: whitesmoke;
+    color: darkblue;
+    font-size: 80px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

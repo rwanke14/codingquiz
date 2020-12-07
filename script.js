@@ -15,31 +15,25 @@ THEN I can save my initials and score
 
 */
 
-var hideJumbotron = document.getElementById ("container");
+//set variables to grab later on down the road from the HTML.
+var hideStart = document.getElementById("hideJumbotron");
 var startQuizBtn = document.getElementById("startQuizBtn");
 var quizTimer = document.getElementById("quizTimer");
-var questions = document.getElementById("questions");
-var answers = document.getElementById("answers");
+var questCard = document.getElementById("questionCard");
 var rightWrong = document.getElementById("rightWrong");
-var quizContent = document.getElementsByClassName("card");
-var currentChoicesIndex = 0
-
-//var nextButton = document.createElement ("button");
-
-//Set variables with values for later. Timer value and Score value set.
-var timerValue = 150;
-var score = 0;
-var questionIndex = 0;
-var quizAnswers = "";
-//var endQuest = questionDetails[1].choices;
 
 
+//set quesiton array, choices, and answers.
 
 var questionDetails = [
     {
-        question: "What is the color of the sky?",
-        choices: ["blue", "green", "yellow", "white"],
-        answer: "blue"
+        question: "How would the doctor describe time?",
+        choices: [
+            "“People assume that time is a strict progression of cause to effect, but actually from a non-linear, non-subjective viewpoint – it’s more like a big ball of wibbly-wobbly time-y wimey stuff.”", 
+            "Physicists define time as the progression of events from the past to the present into the future."                , 
+            "Time can be considered to be the fourth dimension of reality, used to describe events in three-dimensional space.", 
+            "“There’s something that doesn’t make sense. Let’s go and poke it with a stick.”"                                  ],
+        answer: "“People assume that time is a strict progression of cause to effect, but actually from a non-linear, non-subjective viewpoint – it’s more like a big ball of wibbly-wobbly time-y wimey stuff.”",
     },
     {
         question: "What is does 1+1 equal?",
@@ -48,43 +42,130 @@ var questionDetails = [
     },
 ]
 
+//set values.
+var questionDetailsIndex = 0;
+var rightAnswer = "";
+//var stopQuest = questionDetails[1].choices;
+var score = "";
+var timerValue = 120;
 
-
+//hiding questions and timer at the start until start button is selected.
+//questCard.style.visibility = "hidden";
+//quizTimer.style.visibility = "hidden";
 
 
 
 //var choiceBtn = document.createElement("button");
-
-
+//var currentQuestion = questionDetails[questionDetailsIndex];
 
 function nextQuestion () {
 
-    var currentQuestion = questionDetails[questionIndex];
-    currentQuestion.answer;
-    questions.textContent = currentQuestion.question;
-    answers.textContent 
-    
+    var currentQuestion = questionDetails[questionDetailsIndex];
+    questCard.textContent = currentQuestion.question;
+    console.log (questionDetails[questionDetailsIndex]);
 
-    for ( var i = 0 < currentQuestion.choices.length; i++;){
+    for (var i = 0; i < currentQuestion.choices.length; i++){
+
+
+        var liEl = document.createElement("li");
+        liEl.setAttribute("data-index", i);
+        
+
 
         var choiceBtn = document.createElement("button");
-        answers.textContent = currentQuestion.choices[i];
-        answers.appendChild(choiceBtn)
-        //choiceBtn.addEventListener("click", selectAnswer);
-        if (i === 1){
-            break;
-        }
+        choiceBtn.style.color = "whitesmoke";
+        choiceBtn.style.backgroundColor = "darkblue";
+        choiceBtn.style.borderRadius = ".25rem";
+        choiceBtn.style.width = "80%";
+        choiceBtn.style.height = "30%";
+        choiceBtn.style.margin = "2%";
+        choiceBtn.style.textAlign = "left";
+        choiceBtn.style.opacity = "100%";
+        choiceBtn.textContent = currentQuestion.choices[i];
+        
+        //choiceBtn.style.borderRadius = "10%";
+
+        
+        
+        liEl.appendChild(choiceBtn);
+        questCard.appendChild(liEl);
+
+        console.log(liEl);
+
+        choiceBtn.addEventListener("click", selectAnswer);
+        rightAnswer = currentQuestion.correct;
+
+        console.log(questionDetailsIndex);
+        console.log(choiceBtn)
+        
     }
-    console.log(currentQuestion);
-    console.log(currentQuestion);
-console.log(currentQuestion.answer);
-console.log(questionIndex)
+    
+   
 }
 
-console.log (questions);
+function selectAnswer (event) {
+
+    var element = event.target;
+
+    if (element.textContent == questionDetails[questionDetailsIndex].answer) {
+
+        score++;
+        timerValue + 15;
+        rightWrong.textContent = "Correct Answer! Gain 15 seconds!";
+        //add gif here of fez doctor
+
+    } else {
+
+        timerValue - 15;
+        rightWrong.textContent = "Wrong Answer, loose 15 seconds!";
+
+    } 
+
+    questionDetailsIndex++;
+
+    if (questionDetailsIndex >= questionDetails.length) {
+
+        stopQuiz();
+        
+
+    } if (timerValue === 0) {
+        
+        stopQuiz();
+
+    } else {
+
+        nextQuestion();
+    }
+    /*
+    if (currentQuestion.answer === true && questionDetailsIndex < 1) {
+        ++score;
+        console.log(score);
+        
+        localStorage.setItem("score", JSON.stringify(score));
+        questionDetailsIndex++;
+    } if (currentQuestion.answer === false && questionDetailsIndex < 1){
+        score - 5;
+        console.log(score);
+        questionDetailsIndex++;
+    } else {
+        stopQuiz();
+    } */
+    
+    
+
+}
+
+function stopQuiz() {
+
+    
+
+}
+
 function startQuiz() {
 
-    questions.innerHTML = questionDetails[0].question;
+    //quizTimer.style.visibility = "visible";
+    //questCard.style.visibility = "visible";
+    //hideStart.style.display = "none";
 
     var countDown = setInterval(function () {
         timerValue--;
@@ -95,16 +176,15 @@ function startQuiz() {
         }
 
     }, 1000);
-
-    
-
+ 
     nextQuestion();
-    
+
 }
 
 
 
 
+//choiceBtn.addEventListener("click", selectAnswer);
 startQuizBtn.addEventListener("click", startQuiz);
 
 
