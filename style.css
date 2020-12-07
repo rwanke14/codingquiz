@@ -1,5 +1,5 @@
 body {
-    background-image: url(https://ichef.bbci.co.uk/images/ic/1200x675/p04znpk2.jpg);
+    background-image: url(https://initiate.alphacoders.com/images/444/cropped-2560-1600-44447.jpg?1552);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: 100% 210%;
@@ -8,12 +8,11 @@ body {
 
 .jumbotron{
     text-align: center;
-    font-family: fantasy;
+    font-family: 'Do Hyeon', sans-serif;
     color: darkmagenta;
     background-color: dimgray;
     
 }
-
 
 
 #startQuizBtn {
@@ -21,28 +20,24 @@ body {
     background-color: darkmagenta;
     border-radius: .25rem;
     width: 20%;
-    
-    
+    font-family: 'Texturina', serif;
+     
 }
 
 #quizTimer {
-    margin-top: 5%;
-    font-size: x-large;
-    
+    font-size: 4rem;
+    font-family: 'Fira Sans', sans-serif;
+    text-align: left;
 }
 
-.card {
-    color: darkmagenta;
-    opacity: 80%;
-    margin: auto;
-    width: 50%;
-
+#quizArea {
+    width: 80%;
+    height: auto;
+    font-size: 2rem;
+    font-family: 'Fira Sans', sans-serif;
+    color: darkblue;
 }
 
-.card-body {
-    
-    background-color: white;
-}
 
  li {
      color: white
@@ -51,6 +46,8 @@ body {
 .timer {
     background-color: whitesmoke;
     color: darkblue;
-    font-size: 80px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 800px;
+    font-family: 'Fira Sans', sans-serif;
+    width: 100%;
+    opacity: 80%;
 }

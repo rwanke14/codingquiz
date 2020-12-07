@@ -16,12 +16,17 @@ THEN I can save my initials and score
 */
 
 //set variables to grab later on down the road from the HTML.
-var hideStart = document.getElementById("hideJumbotron");
+var hideStart = document.getElementById("jumbotron");
 var startQuizBtn = document.getElementById("startQuizBtn");
 var quizTimer = document.getElementById("quizTimer");
-var questCard = document.getElementById("questionCard");
 var rightWrong = document.getElementById("rightWrong");
-
+var quizTitle = document.getElementById("h1El");
+var para1Jumbo = document.getElementById("p1Text");
+var para2Jumbo = document.getElementById("p2Text");
+var container = document.getElementById("container");
+var submitScore = document.getElementById("submitScore");
+var scoreContainer = document.getElementById("scoreDetails");
+var quizArea = document.getElementById("quizArea");
 
 //set quesiton array, choices, and answers.
 
@@ -29,17 +34,40 @@ var questionDetails = [
     {
         question: "How would the doctor describe time?",
         choices: [
-            "“People assume that time is a strict progression of cause to effect, but actually from a non-linear, non-subjective viewpoint – it’s more like a big ball of wibbly-wobbly time-y wimey stuff.”", 
-            "Physicists define time as the progression of events from the past to the present into the future."                , 
-            "Time can be considered to be the fourth dimension of reality, used to describe events in three-dimensional space.", 
-            "“There’s something that doesn’t make sense. Let’s go and poke it with a stick.”"                                  ],
-        answer: "“People assume that time is a strict progression of cause to effect, but actually from a non-linear, non-subjective viewpoint – it’s more like a big ball of wibbly-wobbly time-y wimey stuff.”",
+            "It’s more like a big ball of wibbly-wobbly time-y wimey stuff.", 
+            "Physicists define time as the progression of events.          ", 
+            "Time can be considered to be the fourth dimension of reality. ", 
+            "There’s always something to look at if you open your eyes!    "],
+        answer: "It’s more like a big ball of wibbly-wobbly time-y wimey stuff.",
     },
     {
-        question: "What is does 1+1 equal?",
-        choices: ["5", "10", "2", "1"],
-        answer: "1",
+        question: "After regenerating what was the first food the eleventh doctor ate?",
+        choices: ["Banana Pudding", "Fish Custard", "Hamburger", "Jello"],
+        answer: "Fish Custard",
     },
+    {
+        question: "What episode is this quote from? Don’t blink. Don’t even blink. Blink and you’re dead. Don’t turn your back. Don’t look away. And don’t blink.",
+        choices: ["Season 7, Episode 10", "Season 5, Episode 5", "Season 3, Episode 10", "Season 5, Episode 4 "],
+        answer: "Season 3, Episode 10",
+    },
+    {
+        question: "Which doctor had the rule of Rule 1: The Doctors Lies!",
+        choices: ["Ninth Doctor", "Eleventh Doctor", "Twelfth Doctor", "Tenth Doctor"],
+        answer: "Eleventh Doctor",
+
+    },
+    {
+        question: "What year did Doctor Who first air on televison?",
+        choices: ["1963", "1989", "2005", "1972"],
+        answer: "1963",
+    },
+    {
+        question: "Which enemy in Doctor Who says Exterminate?",
+        choices: ["Weeping Angels", "Cybermen", "Daleks", "Zygons"],
+        answer: "Daleks",
+
+    }
+
 ]
 
 //set values.
@@ -47,21 +75,23 @@ var questionDetailsIndex = 0;
 var rightAnswer = "";
 //var stopQuest = questionDetails[1].choices;
 var score = "";
-var timerValue = 120;
+var timerValue = 60;
+var wrongQuest = 5;
+var correctQuest = 10;
 
 //hiding questions and timer at the start until start button is selected.
-//questCard.style.visibility = "hidden";
-//quizTimer.style.visibility = "hidden";
+quizArea.style.visibility = "hidden";
+quizTimer.style.visibility = "hidden";
+submitScore.style.visibility = "hidden";
+scoreContainer.style.visibility = "hidden";
 
 
-
-//var choiceBtn = document.createElement("button");
-//var currentQuestion = questionDetails[questionDetailsIndex];
 
 function nextQuestion () {
 
     var currentQuestion = questionDetails[questionDetailsIndex];
-    questCard.textContent = currentQuestion.question;
+    quizArea.textContent = currentQuestion.question;
+    quizArea.style.backgroundColor = "whitesmoke";
     console.log (questionDetails[questionDetailsIndex]);
 
     for (var i = 0; i < currentQuestion.choices.length; i++){
@@ -76,11 +106,14 @@ function nextQuestion () {
         choiceBtn.style.color = "whitesmoke";
         choiceBtn.style.backgroundColor = "darkblue";
         choiceBtn.style.borderRadius = ".25rem";
-        choiceBtn.style.width = "80%";
+        choiceBtn.style.width = "60%";
         choiceBtn.style.height = "30%";
         choiceBtn.style.margin = "2%";
         choiceBtn.style.textAlign = "left";
         choiceBtn.style.opacity = "100%";
+        choiceBtn.style.fontSize = "1rem"
+        choiceBtn.style.fontFamily = "'Fira Sans', sans-serif"
+        choiceBtn.style.padding = "2%"
         choiceBtn.textContent = currentQuestion.choices[i];
         
         //choiceBtn.style.borderRadius = "10%";
@@ -88,7 +121,7 @@ function nextQuestion () {
         
         
         liEl.appendChild(choiceBtn);
-        questCard.appendChild(liEl);
+        quizArea.appendChild(liEl);
 
         console.log(liEl);
 
@@ -109,14 +142,14 @@ function selectAnswer (event) {
 
     if (element.textContent == questionDetails[questionDetailsIndex].answer) {
 
-        score++;
-        timerValue + 15;
+        score = score + 10
         rightWrong.textContent = "Correct Answer! Gain 15 seconds!";
         //add gif here of fez doctor
 
     } else {
-
-        timerValue - 15;
+        score = score - 5;
+        timerValue = timerValue - 15;
+        
         rightWrong.textContent = "Wrong Answer, loose 15 seconds!";
 
     } 
@@ -136,36 +169,54 @@ function selectAnswer (event) {
 
         nextQuestion();
     }
-    /*
-    if (currentQuestion.answer === true && questionDetailsIndex < 1) {
-        ++score;
-        console.log(score);
-        
-        localStorage.setItem("score", JSON.stringify(score));
-        questionDetailsIndex++;
-    } if (currentQuestion.answer === false && questionDetailsIndex < 1){
-        score - 5;
-        console.log(score);
-        questionDetailsIndex++;
-    } else {
-        stopQuiz();
-    } */
-    
-    
 
 }
 
 function stopQuiz() {
 
+    quizTimer.style.visibility = "hidden";
+    quizArea.style.visibility = "hidden";
+
+    var imgEl = document.createElement ("img");
+    imgEl.setAttribute("src", "https://media1.tenor.com/images/8a63ed5cc169b8df24f0d9f2125e69ca/tenor.gif?itemid=14827556")
+    imgEl.style.margin = "10%";
+
+    var h1El = document.createElement ("h1");
+    h1El.textContent = "Everything has it's time and everything ends.";
+    var h2El = document.createElement ("h2");
+    h2El.textContent = "Quiz Over!"
+    var scoreEl = document.createElement ("h2");
+    scoreEl.textContent = "You got a score of " + score + "!"
+    var enterEl = document.createElement ("h2");
+    enterEl.textContent = "Please enter your intitials below to submit your score!"
+    enterEl.style.marginBottom = "20%"
+
+    
+    scoreContainer.style.visibility = "visible";
+    container.style.visibility = "visible";
+    scoreContainer.appendChild(imgEl);
+    scoreContainer.appendChild(h1El);
+    scoreContainer.appendChild(h2El);
+    scoreContainer.appendChild(scoreEl);
+
+
+    submitHighScore();
     
 
 }
 
 function startQuiz() {
 
-    //quizTimer.style.visibility = "visible";
-    //questCard.style.visibility = "visible";
-    //hideStart.style.display = "none";
+    quizTimer.style.visibility = "visible";
+    quizArea.style.visibility = "visible";
+
+
+    quizTitle.style.visibility = "hidden";
+    para1Jumbo.style.visibility = "hidden";
+    para2Jumbo.style.visibility = "hidden";
+    startQuizBtn.style.visibility = "hidden";
+    container.style.visibility = "hidden";
+    hideStart.style.visibility = "hidden";
 
     var countDown = setInterval(function () {
         timerValue--;
@@ -181,73 +232,18 @@ function startQuiz() {
 
 }
 
+function submitHighScore() {
+
+
+submitScore.style.visibility = "visible";
 
 
 
-//choiceBtn.addEventListener("click", selectAnswer);
-startQuizBtn.addEventListener("click", startQuiz);
-
-
-
-
-
-
-
-
-
-//function endQuiz (){
-
-    //var clear = document.getElementsByTagName("body");
-    //clear.createElement("jumbotron jumbotron-fluid");
-    
-
-
-//}
-/*
-function nextQuestion() {
-
-    
-}
-
-/*answers.addEventListener ("click", function(){
-     if (answers === "blue") {
-         alert ("correct answer!")
-         startQuiz(questionDetails[1].question);
-
-     } else {
-         alert("wrong!")
-
-     }
-
- }) 
-
-
-var replaceQuestion = document.getElementById ("questions");
-    replaceQuestion.replaceChild (questionDetails)
-
-
-    questions.innerHTML = questionDetails[1].question; 
-
-    questionDetails[1].choices.forEach(function (item, index) {
-        var choiceBtn = document.createElement("button");
-        choiceBtn.innerHTML = item;
-        answers.appendChild(choiceBtn)
-    });
-
-
-
-
-
-function timerCount() {
 
 
 }
 
 
-//nextButton.addEventListener("click", nextQuestion);
+
 startQuizBtn.addEventListener("click", startQuiz);
 
-
-
-
-/*might need a second HTML for logging scores. */
