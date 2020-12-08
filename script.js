@@ -27,6 +27,8 @@ var container = document.getElementById("container");
 var submitScore = document.getElementById("submitScore");
 var scoreContainer = document.getElementById("scoreDetails");
 var quizArea = document.getElementById("quizArea");
+var submitBtn = document.getElementById("button-addon2");
+var inputIntials = document.getElementsByTagName("inputBox")
 
 //set quesiton array, choices, and answers.
 
@@ -73,8 +75,9 @@ var questionDetails = [
 //set values.
 var questionDetailsIndex = 0;
 var rightAnswer = "";
+
 //var stopQuest = questionDetails[1].choices;
-var score = "";
+var score = 0;
 var timerValue = 60;
 var wrongQuest = 5;
 var correctQuest = 10;
@@ -84,6 +87,8 @@ quizArea.style.visibility = "hidden";
 quizTimer.style.visibility = "hidden";
 submitScore.style.visibility = "hidden";
 scoreContainer.style.visibility = "hidden";
+//highScoreList.style.visibility = "visible";
+//highScoresSec.style.visibility = "visible";
 
 
 
@@ -142,9 +147,10 @@ function selectAnswer (event) {
 
     if (element.textContent == questionDetails[questionDetailsIndex].answer) {
 
-        score = score + 10
+        score = score + 10;
         rightWrong.textContent = "Correct Answer! Gain 15 seconds!";
         //add gif here of fez doctor
+        console.log(score)
 
     } else {
         score = score - 5;
@@ -193,14 +199,18 @@ function stopQuiz() {
 
     
     scoreContainer.style.visibility = "visible";
+    submitScore.style.visibility = "visible";
     container.style.visibility = "visible";
+    container.style.backgroundImage = "https://mcdn.wallpapersafari.com/small/20/24/H3zFaD.jpg"
+    
     scoreContainer.appendChild(imgEl);
     scoreContainer.appendChild(h1El);
     scoreContainer.appendChild(h2El);
     scoreContainer.appendChild(scoreEl);
+    hideStart.remove();
 
-
-    submitHighScore();
+    
+    submitScores();
     
 
 }
@@ -232,17 +242,73 @@ function startQuiz() {
 
 }
 
-function submitHighScore() {
 
 
-submitScore.style.visibility = "visible";
+// variables for highscores portion.
+
+var gameScores = [];
+var pastGames = [];
+console.log (gameScores)
+console.log (pastGames)
+
+//storing high scores
 
 
 
+var submitBtn = document.getElementById("button-addon2");
+var inputIntials = document.getElementsByTagName("inputBox")
+var highScoresSec = document.getElementById("HighScores");
+var highScoreList = document.getElementById("highScoreList");
+var scoreList = document.getElementById("orderedScores");
+var highScores = [];
 
+function submitScores () {
+
+submitBtn.addEventListener("click", function () {
+    
+    if (inputIntials === null) {
+        alert("Please enter initials!")
+
+    } else {
+
+        //Set visibility of sections to switch out containers.
+        scoreContainer.style.visibility = "hidden";
+        submitScore.style.visibility = "hidden";
+        container.style.visibility = "visible";
+        //highScoreList.style.visibility = "visible";
+        //highScoresSec.style.visibility = "visible";
+        highScoresSec.style.backgroundColor = "lightblue";
+        
+        var inputList = {
+            userLog: inputIntials.value,
+            score: score,
+        }
+
+        console.log (inputList)
+
+        var oldScores = JSON.parse(localStorage.getItem("highScores"));
+        console.log (oldScores)
+
+        var userScore = JSON.parse(localStorage.setItem("highScores"));
+        userScore.sort((a,b) => a.score - b.score);
+
+        console.log(userScore);
+
+        for (var i = 0; i < highScores.length; i++){
+            var liEl = document.createElement("li");
+            liEl.appendChild("scoreList");
+            liEl.textContent = inputList;
+
+        }
+  
+
+    }
+    
+    
+
+})
 
 }
-
 
 
 startQuizBtn.addEventListener("click", startQuiz);

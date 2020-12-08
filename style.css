@@ -9,8 +9,9 @@ body {
 .jumbotron{
     text-align: center;
     font-family: 'Do Hyeon', sans-serif;
-    color: darkmagenta;
-    background-color: dimgray;
+    color: darkblue;
+    background-color: lightblue;
+    opacity: 80%;
     
 }
 
@@ -44,10 +45,35 @@ body {
  }
 
 .timer {
-    background-color: whitesmoke;
+    background-color: lightblue;
     color: darkblue;
     font-size: 800px;
     font-family: 'Fira Sans', sans-serif;
     width: 100%;
     opacity: 80%;
+}
+
+#submtiScore .container {
+    background-color: #add8e6;
+    opacity: 80%;
+    background-image: url(https://mcdn.wallpapersafari.com/small/20/24/H3zFaD.jpg);
+
+}
+
+#scoreDetails {
+    background-color: lightblue;
+    color: darkblue;
+    opacity: 80%;
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+#inputBtn {
+    background-color: lightblue;
+}
+
+.btn {
+    background-color: darkblue;
+    color: whitesmoke;
 }
