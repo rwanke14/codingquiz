@@ -27,8 +27,12 @@ var container = document.getElementById("container");
 var submitScore = document.getElementById("submitScore");
 var scoreContainer = document.getElementById("scoreDetails");
 var quizArea = document.getElementById("quizArea");
+var quizArea = document.getElementById("quizArea");
 var submitBtn = document.getElementById("button-addon2");
 var inputIntials = document.getElementsByTagName("inputBox")
+var submitBtn = document.getElementById("button-addon2");
+var inputIntials = document.getElementById("inputBox")
+var highScoresSec = document.getElementById("HighScores");
 
 //set quesiton array, choices, and answers.
 
@@ -88,7 +92,7 @@ quizTimer.style.visibility = "hidden";
 submitScore.style.visibility = "hidden";
 scoreContainer.style.visibility = "hidden";
 //highScoreList.style.visibility = "visible";
-//highScoresSec.style.visibility = "visible";
+highScoresSec.style.visibility = "hidden";
 
 
 
@@ -98,6 +102,8 @@ function nextQuestion () {
     quizArea.textContent = currentQuestion.question;
     quizArea.style.backgroundColor = "whitesmoke";
     console.log (questionDetails[questionDetailsIndex]);
+    var quizUl = document.createElement("ul");
+    quizUl.setAttribute("style","list-style-type:none");
 
     for (var i = 0; i < currentQuestion.choices.length; i++){
 
@@ -126,7 +132,8 @@ function nextQuestion () {
         
         
         liEl.appendChild(choiceBtn);
-        quizArea.appendChild(liEl);
+        quizUl.appendChild(liEl);
+        quizArea.appendChild(quizUl);
 
         console.log(liEl);
 
@@ -152,6 +159,7 @@ function selectAnswer (event) {
         //add gif here of fez doctor
         console.log(score)
 
+
     } else {
         score = score - 5;
         timerValue = timerValue - 15;
@@ -162,13 +170,8 @@ function selectAnswer (event) {
 
     questionDetailsIndex++;
 
-    if (questionDetailsIndex >= questionDetails.length) {
+    if (questionDetailsIndex >= questionDetails.length || timerValue <= 0) {
 
-        stopQuiz();
-        
-
-    } if (timerValue === 0) {
-        
         stopQuiz();
 
     } else {
@@ -179,6 +182,8 @@ function selectAnswer (event) {
 }
 
 function stopQuiz() {
+
+    timerValue = 0
 
     quizTimer.style.visibility = "hidden";
     quizArea.style.visibility = "hidden";
@@ -201,7 +206,7 @@ function stopQuiz() {
     scoreContainer.style.visibility = "visible";
     submitScore.style.visibility = "visible";
     container.style.visibility = "visible";
-    container.style.backgroundImage = "https://mcdn.wallpapersafari.com/small/20/24/H3zFaD.jpg"
+    //container.style.backgroundImage = url("https://mcdn.wallpapersafari.com/small/20/24/H3zFaD.jpg");
     
     scoreContainer.appendChild(imgEl);
     scoreContainer.appendChild(h1El);
@@ -232,7 +237,7 @@ function startQuiz() {
         timerValue--;
         quizTimer.innerHTML = timerValue;
 
-        if (timerValue === 0) {
+        if (timerValue <= 0) {
             clearInterval(countDown);
         }
 
@@ -244,28 +249,28 @@ function startQuiz() {
 
 
 
-// variables for highscores portion.
 
-var gameScores = [];
-var pastGames = [];
-console.log (gameScores)
-console.log (pastGames)
+
+
 
 //storing high scores
 
 
 
 var submitBtn = document.getElementById("button-addon2");
-var inputIntials = document.getElementsByTagName("inputBox")
+var inputIntials = document.getElementById("inputBox")
 var highScoresSec = document.getElementById("HighScores");
-var highScoreList = document.getElementById("highScoreList");
-var scoreList = document.getElementById("orderedScores");
-var highScores = [];
+//var highScoreList = document.getElementById("highScoreList");
+//var scoreList = document.getElementById("orderedScores");
+
+//var allScores = [];
 
 function submitScores () {
 
 submitBtn.addEventListener("click", function () {
     
+
+
     if (inputIntials === null) {
         alert("Please enter initials!")
 
@@ -275,33 +280,60 @@ submitBtn.addEventListener("click", function () {
         scoreContainer.style.visibility = "hidden";
         submitScore.style.visibility = "hidden";
         container.style.visibility = "visible";
-        //highScoreList.style.visibility = "visible";
-        //highScoresSec.style.visibility = "visible";
+        //highScoresSec.style.visibility= "visible";
+
+
         highScoresSec.style.backgroundColor = "lightblue";
+
+
+        console.log(inputIntials.value)
         
+        
+        var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
         var inputList = {
             userLog: inputIntials.value,
             score: score,
         }
 
+        highScores.push(inputList)
+
         console.log (inputList)
 
-        var oldScores = JSON.parse(localStorage.getItem("highScores"));
-        console.log (oldScores)
+        //console.log (oldScores)
 
-        var userScore = JSON.parse(localStorage.setItem("highScores"));
-        userScore.sort((a,b) => a.score - b.score);
+        
+        //var userScores = JSON.parse(localStorage.getItem("highScores"));
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+        
+        //localStorage.setItem("allScores",JSON.stringify(allScores));
+        
+        console.log(highScores);
+        highScores.push(inputList);
 
-        console.log(userScore);
+        //only list 10 scores at a time.
+        //highScores.splice(10);
+        highScores.sort((a, b) => a.score - b.score);
+        highScores.reverse()
+
+        //var h1El = document.createElement("h1");
+       // h1El.appendChild("highScores");
+        //console.log(userScore);
 
         for (var i = 0; i < highScores.length; i++){
+
+            var divEl = document.createElement("div");
             var liEl = document.createElement("li");
-            liEl.appendChild("scoreList");
-            liEl.textContent = inputList;
+            liEl.className = "scoreList";
+            highScoresSec.appendChild(divEl);
+            divEl.appendChild(liEl);
+            liEl.textContent = "Intials: " + highScores[i].userLog + " Score: " + highScores[i].score;
+            console.log(liEl)
+            highScoresSec.style.visibility= "visible";
 
         }
   
-
+        
     }
     
     

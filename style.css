@@ -1,5 +1,5 @@
 body {
-    background-image: url(https://initiate.alphacoders.com/images/444/cropped-2560-1600-44447.jpg?1552);
+    /*background-image: url(./assets/TardisBackground.jpg);*/
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: 100% 210%;
@@ -57,7 +57,7 @@ body {
     background-color: #add8e6;
     opacity: 80%;
     background-image: url(https://mcdn.wallpapersafari.com/small/20/24/H3zFaD.jpg);
-
+    font-family: 'Fira Sans', sans-serif;
 }
 
 #scoreDetails {
@@ -76,4 +76,29 @@ body {
 .btn {
     background-color: darkblue;
     color: whitesmoke;
+}
+
+.btn.btn-outline-secondary {
+    background-color: darkblue;
+    color: whitesmoke;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+h1 {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 80px;
+    color: darkblue;
+}
+.scoreList {
+
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 40px;
+    color: darkblue;
+}
+
+.container {
+    background-color: #add8e6;
+    opacity: 80%;
+    background-image: url(https://mcdn.wallpapersafari.com/small/20/24/H3zFaD.jpg);
+    font-family: 'Fira Sans', sans-serif;
 }
