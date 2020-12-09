@@ -32,7 +32,13 @@ var submitBtn = document.getElementById("button-addon2");
 var inputIntials = document.getElementsByTagName("inputBox")
 var submitBtn = document.getElementById("button-addon2");
 var inputIntials = document.getElementById("inputBox")
+var submitBtn = document.getElementById("button-addon2");
+var inputIntials = document.getElementById("inputBox")
 var highScoresSec = document.getElementById("HighScores");
+var correct = document.getElementById("correct");
+var wrong = document.getElementById("wrong");
+var giphYes = document.getElementById("giphYes");
+var giphNo = document.getElementById("giphNo");
 
 //set quesiton array, choices, and answers.
 
@@ -83,27 +89,33 @@ var rightAnswer = "";
 //var stopQuest = questionDetails[1].choices;
 var score = 0;
 var timerValue = 60;
-var wrongQuest = 5;
-var correctQuest = 10;
 
 //hiding questions and timer at the start until start button is selected.
 quizArea.style.visibility = "hidden";
 quizTimer.style.visibility = "hidden";
 submitScore.style.visibility = "hidden";
 scoreContainer.style.visibility = "hidden";
-//highScoreList.style.visibility = "visible";
 highScoresSec.style.visibility = "hidden";
+giphNo.style.visibility = "hidden";
+giphYes.style.visibility = "hidden";
+correct.style.visibility = "hidden";
+wrong.style.visibility = "hidden";
 
 
+
+//This is my function for looping through the quesitons to be asked in the quiz.
 
 function nextQuestion () {
 
+    //setting up quesiton content.
     var currentQuestion = questionDetails[questionDetailsIndex];
     quizArea.textContent = currentQuestion.question;
     quizArea.style.backgroundColor = "whitesmoke";
     console.log (questionDetails[questionDetailsIndex]);
     var quizUl = document.createElement("ul");
     quizUl.setAttribute("style","list-style-type:none");
+
+    // for loop - loops through questions and choices as user hits the answer.  This is one of the areas I collobrated on with my group mentioned in the readme.
 
     for (var i = 0; i < currentQuestion.choices.length; i++){
 
@@ -112,8 +124,9 @@ function nextQuestion () {
         liEl.setAttribute("data-index", i);
         
 
-
+        //stylizing the choiceBtn and creating it.
         var choiceBtn = document.createElement("button");
+
         choiceBtn.style.color = "whitesmoke";
         choiceBtn.style.backgroundColor = "darkblue";
         choiceBtn.style.borderRadius = ".25rem";
@@ -126,11 +139,7 @@ function nextQuestion () {
         choiceBtn.style.fontFamily = "'Fira Sans', sans-serif"
         choiceBtn.style.padding = "2%"
         choiceBtn.textContent = currentQuestion.choices[i];
-        
-        //choiceBtn.style.borderRadius = "10%";
 
-        
-        
         liEl.appendChild(choiceBtn);
         quizUl.appendChild(liEl);
         quizArea.appendChild(quizUl);
@@ -148,27 +157,51 @@ function nextQuestion () {
    
 }
 
+
+//this function determines whether and answer is wrong or right and then either adds to the score or subtracts from it.
+
 function selectAnswer (event) {
 
     var element = event.target;
 
+    //setting up if/else statement for what happens if you get a question wrong or right.
+
     if (element.textContent == questionDetails[questionDetailsIndex].answer) {
 
         score = score + 10;
-        rightWrong.textContent = "Correct Answer! Gain 15 seconds!";
-        //add gif here of fez doctor
-        console.log(score)
+        timerValue = timerValue + 15;
+
+        correct.style.visibility = "visible";
+        giphYes.style.visibility = "visible";
+
+
+        
+        setTimeout(function() {
+            correct.style.visibility = "hidden";
+            giphYes.style.visibility = "hidden";
+        }, 1000)
 
 
     } else {
+
         score = score - 5;
         timerValue = timerValue - 15;
-        
-        rightWrong.textContent = "Wrong Answer, loose 15 seconds!";
 
+        wrong.style.visibility = "visible";
+        giphNo.style.visibility = "visible";
+
+        
+        setTimeout(function() {
+            wrong.style.visibility = "hidden";
+            giphNo.style.visibility = "hidden";
+        }, 1000)
+       
+        
     } 
 
     questionDetailsIndex++;
+    rightWrong
+    //This statement tells the quiz to end either when there are no more questions or the timer has run out. If not nextquestion.
 
     if (questionDetailsIndex >= questionDetails.length || timerValue <= 0) {
 
@@ -180,6 +213,9 @@ function selectAnswer (event) {
     }
 
 }
+
+
+//This function sets up my submission/end of quiz page. Mostly setting up the elements.
 
 function stopQuiz() {
 
@@ -220,6 +256,8 @@ function stopQuiz() {
 
 }
 
+//This function takes effect when the start button is clicked and then mainly sets the timer and the visibility of the HTML that should be hidden or visible.
+
 function startQuiz() {
 
     quizTimer.style.visibility = "visible";
@@ -249,21 +287,7 @@ function startQuiz() {
 
 
 
-
-
-
-
-//storing high scores
-
-
-
-var submitBtn = document.getElementById("button-addon2");
-var inputIntials = document.getElementById("inputBox")
-var highScoresSec = document.getElementById("HighScores");
-//var highScoreList = document.getElementById("highScoreList");
-//var scoreList = document.getElementById("orderedScores");
-
-//var allScores = [];
+//This function creates an event that when the user logs their intials their score and initials are logged into localstorage and then pushed to the high score page.
 
 function submitScores () {
 
@@ -280,7 +304,7 @@ submitBtn.addEventListener("click", function () {
         scoreContainer.style.visibility = "hidden";
         submitScore.style.visibility = "hidden";
         container.style.visibility = "visible";
-        //highScoresSec.style.visibility= "visible";
+
 
 
         highScoresSec.style.backgroundColor = "lightblue";
@@ -300,25 +324,19 @@ submitBtn.addEventListener("click", function () {
 
         console.log (inputList)
 
-        //console.log (oldScores)
-
-        
-        //var userScores = JSON.parse(localStorage.getItem("highScores"));
+ 
         localStorage.setItem("highScores", JSON.stringify(highScores));
         
-        //localStorage.setItem("allScores",JSON.stringify(allScores));
+
         
         console.log(highScores);
         highScores.push(inputList);
 
-        //only list 10 scores at a time.
-        //highScores.splice(10);
+        //Some of the next pieces of code were framed up from a study session I had with my group - see readme for references.
+        
         highScores.sort((a, b) => a.score - b.score);
         highScores.reverse()
 
-        //var h1El = document.createElement("h1");
-       // h1El.appendChild("highScores");
-        //console.log(userScore);
 
         for (var i = 0; i < highScores.length; i++){
 
@@ -342,6 +360,7 @@ submitBtn.addEventListener("click", function () {
 
 }
 
+//event for the start quiz button
 
 startQuizBtn.addEventListener("click", startQuiz);
 

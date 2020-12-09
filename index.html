@@ -17,7 +17,7 @@
 
 <body>
     <header>
-        <div id="quizTimer" class="timer">Timer goes here</div>
+        <div id="quizTimer" class="timer"></div>
     </header>
     <div class="jumbotron jumbotron-fluid " id="jumbotron">
         <div class="container" id="container">
@@ -33,7 +33,13 @@
         </div>
     </div>
     </div>
-    <div id="rightWrong"></div>
+    <div id="rightWrong">
+        <div id="correct">Correct Answer! Gain 15 seconds!</div>
+        <img id="giphYes" src="https://media1.tenor.com/images/d086af77a09dc7a94f81dd9debb682b0/tenor.gif?itemid=9222745" alt="">
+        <div id="wrong">Wrong Answer, loose 15 seconds!</div>
+        <img id="giphNo" src="https://i.pinimg.com/originals/a5/02/32/a50232193bd77f20e3de029784c33b33.gif" alt="">
+    </div>
+
 
     <div class="container" id="submitScore">
         <div class="container" id="scoreDetails"></div>
@@ -66,7 +72,7 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
     <script src="./script.js" defer></script>
-    <!--<script src="./test.js"></script>-->
+
 
 </body>
 

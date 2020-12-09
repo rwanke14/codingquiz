@@ -1,5 +1,5 @@
 body {
-    /*background-image: url(./assets/TardisBackground.jpg);*/
+    background-image: url(./assets/TardisBackground.jpg);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: 100% 210%;
@@ -17,8 +17,8 @@ body {
 
 
 #startQuizBtn {
-    color: white;
-    background-color: darkmagenta;
+    color: whitesmoke;
+    background-color: darkblue;
     border-radius: .25rem;
     width: 20%;
     font-family: 'Texturina', serif;
@@ -28,7 +28,7 @@ body {
 #quizTimer {
     font-size: 4rem;
     font-family: 'Fira Sans', sans-serif;
-    text-align: left;
+    text-align: center;
 }
 
 #quizArea {
@@ -56,7 +56,6 @@ body {
 #submtiScore .container {
     background-color: #add8e6;
     opacity: 80%;
-    background-image: url(https://mcdn.wallpapersafari.com/small/20/24/H3zFaD.jpg);
     font-family: 'Fira Sans', sans-serif;
 }
 
@@ -101,4 +100,13 @@ h1 {
     opacity: 80%;
     background-image: url(https://mcdn.wallpapersafari.com/small/20/24/H3zFaD.jpg);
     font-family: 'Fira Sans', sans-serif;
+}
+
+#rightWrong {
+
+    text-align: center;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 40px;
+    color: white;
+
 }
