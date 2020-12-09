@@ -24,5 +24,5 @@ https://www.youtube.com/watch?v=riDzcEQbX6k&ab_channel=WebDevSimplified (Web Dev
 
 As always I referenced W3Schools and MDN for additonal resources while putting things together.
 
-Photos of final product:
+Photos of final product are located in asset folder.
 
