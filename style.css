@@ -87,7 +87,9 @@ h1 {
     font-family: 'Fira Sans', sans-serif;
     font-size: 80px;
     color: darkblue;
+    text-align: center;
 }
+
 .scoreList {
 
     font-family: 'Fira Sans', sans-serif;
@@ -99,7 +101,8 @@ h1 {
     background-color: #add8e6;
     opacity: 80%;
     background-image: url(https://mcdn.wallpapersafari.com/small/20/24/H3zFaD.jpg);
-    font-family: 'Fira Sans', sans-serif;
+    width: 50%;
+    height: auto;
 }
 
 #rightWrong {
@@ -108,5 +111,7 @@ h1 {
     font-family: 'Fira Sans', sans-serif;
     font-size: 40px;
     color: white;
+    align-items: center;
 
 }
+

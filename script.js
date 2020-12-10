@@ -115,6 +115,8 @@ function nextQuestion () {
     var quizUl = document.createElement("ul");
     quizUl.setAttribute("style","list-style-type:none");
 
+    container.style.width = "15px";
+    container.style.height = "15px";
     // for loop - loops through questions and choices as user hits the answer.  This is one of the areas I collobrated on with my group mentioned in the readme.
 
     for (var i = 0; i < currentQuestion.choices.length; i++){
@@ -173,13 +175,13 @@ function selectAnswer (event) {
 
         correct.style.visibility = "visible";
         giphYes.style.visibility = "visible";
-
+        
 
         
         setTimeout(function() {
             correct.style.visibility = "hidden";
             giphYes.style.visibility = "hidden";
-        }, 1000)
+        }, 2000)
 
 
     } else {
@@ -187,14 +189,23 @@ function selectAnswer (event) {
         score = score - 5;
         timerValue = timerValue - 15;
 
+        
+
+        correct.appendChild(wrong);
+        rightWrong.appendChild(giphNo);
+        
+
         wrong.style.visibility = "visible";
         giphNo.style.visibility = "visible";
+        
+        
+        
 
         
         setTimeout(function() {
             wrong.style.visibility = "hidden";
             giphNo.style.visibility = "hidden";
-        }, 1000)
+        }, 2000)
        
         
     } 
@@ -304,8 +315,8 @@ submitBtn.addEventListener("click", function () {
         scoreContainer.style.visibility = "hidden";
         submitScore.style.visibility = "hidden";
         container.style.visibility = "visible";
-
-
+        scoreContainer.style.height = "15px";
+        
 
         highScoresSec.style.backgroundColor = "lightblue";
 
@@ -339,6 +350,7 @@ submitBtn.addEventListener("click", function () {
 
 
         for (var i = 0; i < highScores.length; i++){
+
 
             var divEl = document.createElement("div");
             var liEl = document.createElement("li");
