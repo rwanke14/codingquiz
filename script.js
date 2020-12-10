@@ -189,19 +189,13 @@ function selectAnswer (event) {
         score = score - 5;
         timerValue = timerValue - 15;
 
-        
-
         correct.appendChild(wrong);
         rightWrong.appendChild(giphNo);
-        
 
         wrong.style.visibility = "visible";
         giphNo.style.visibility = "visible";
         
-        
-        
 
-        
         setTimeout(function() {
             wrong.style.visibility = "hidden";
             giphNo.style.visibility = "hidden";
